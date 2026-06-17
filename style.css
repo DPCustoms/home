@@ -33,8 +33,23 @@ header.scrolled #logo {
 header.scrolled #hamburger { display: flex; }
 #hamburger span { width: 25px; height: 3px; background: white; }
 
-#nav-overlay { position: fixed; top: 0; right: -100%; width: 250px; height: 100%; background: white; transition: 0.3s; padding-top: 80px; }
-#nav-overlay.active { right: 0; }
+#nav-overlay {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Hidden */
+    width: 250px;
+    height: 100%;
+    background: white;
+    transition: 0.3s;
+    z-index: 2000; /* Higher than header */
+    padding-top: 80px;
+}
+#nav-overlay.active {
+    right: 0; /* Slides into view */
+}
+#hamburger {
+    z-index: 2001; 
+}
 #nav-overlay ul { list-style: none; padding: 20px; color: black; }
 #nav-overlay li { padding: 15px; cursor: pointer; font-size: 1.2rem; }
 

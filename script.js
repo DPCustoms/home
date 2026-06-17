@@ -19,26 +19,30 @@ function scrollToSection(id) {
 }
 
 async function loadCatalogue() {
-    const csvUrl = 'YOUR_CSV_LINK_HERE'; // Replace with your published CSV link
+    const csvUrl = 'YOUR_PUBLISHED_CSV_LINK_HERE'; // Double-check this link!
     try {
         const res = await fetch(csvUrl);
         const data = await res.text();
-        const rows = data.split('\n').slice(1);
+        const rows = data.split('\n');
         const grid = document.getElementById('product-grid');
+        grid.innerHTML = ''; // Clear existing
         
-        rows.forEach(row => {
-            const [img, price, colors, brand] = row.split(',');
-            if (!img) return;
+        // Start from index 1 to skip the header row
+        for (let i = 1; i < rows.length; i++) {
+            const cols = rows[i].split(',');
+            if (cols.length < 4) continue; // Skip empty rows
+            
+            const [img, price, colors, brand] = cols;
             grid.innerHTML += `
                 <div class="product-card">
-                    <img src="${img}" alt="${brand}">
-                    <h3>${brand}</h3>
-                    <p>Price: ${price}</p>
-                    <p>Colors: ${colors}</p>
+                    <img src="${img.trim()}" alt="Product">
+                    <h3>${brand ? brand.trim() : 'N/A'}</h3>
+                    <p>Price: ${price ? price.trim() : 'N/A'}</p>
+                    <p>Colors: ${colors ? colors.trim() : 'N/A'}</p>
                 </div>
             `;
-        });
-    } catch (e) { console.error("Error:", e); }
+        }
+    } catch (e) { console.error("Error loading CSV:", e); }
 }
 
 loadCatalogue();
