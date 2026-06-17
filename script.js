@@ -19,7 +19,7 @@ function scrollToSection(id) {
 }
 
 async function loadCatalogue() {
-    const csvUrl = 'YOUR_PUBLISHED_CSV_LINK_HERE'; // Double-check this link!
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT2se5HZNZyhxQnuxilcaHMjG_ddSMT5pjeO6K5JXEKilqE9YO7s8f8txgXFQ1TDv5e05faDUA79vXw/pub?output=csv'; // Double-check this link!
     try {
         const res = await fetch(csvUrl);
         const data = await res.text();
